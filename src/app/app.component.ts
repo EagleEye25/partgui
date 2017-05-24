@@ -6,7 +6,7 @@ import { WindowService } from './core/window.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss', './app.component.controls.scss']
 })
 export class AppComponent implements OnInit {
   isCollapsed: boolean = true;
@@ -34,6 +34,6 @@ export class AppComponent implements OnInit {
       })
       .filter(route => route.outlet === 'primary')
       .flatMap(route => route.data)
-      .subscribe(data => this.title = data.title);
+      .subscribe(data => this.title = data['title']);
   }
 }
