@@ -71,6 +71,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    // console.log('here:', this.moveFeatureImg([1, 2, 3], 0, 1));
     this.initDragDropEl('drag-n-drop');
 
     this.fileInput = document.getElementById('fileInput');
@@ -277,6 +278,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     if (this.picturesToUpload.length === 0) {
       return template;
     } else {
+      this.picturesToUpload = this.moveFeatureImg(this.picturesToUpload, this.featuredPicture, 0);
       await this.image.upload(template, this.picturesToUpload);
     }
 
@@ -458,6 +460,17 @@ export class AddItemComponent implements OnInit, OnDestroy {
         this.processPictures(e, true);
         return false;
     };
+  }
+
+  moveFeatureImg(array: any, old_index: number, new_index: number) {
+    if (new_index >= array.length) {
+      let k = new_index - array.length + 1;
+      while (k--) {
+        array.push(undefined);
+      }
+    }
+    array.splice(new_index, 0, array.splice(old_index, 1)[0]);
+    return array
   }
 
 }
